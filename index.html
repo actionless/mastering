@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actionless Mastering</title>
+    <link href="https://fontlibrary.org//face/fantasque-sans-mono" zrel="stylesheet" media="screen" type="text/css" />
+    <link href="https://fonts.googleapis.com/css2?family=Bokor&display=swap" rel="stylesheet">
+    <!--<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">-->
+    <!--<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet">-->
+    <!--<link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">-->
+    <style>
+
+    /*************************************************************************/
+
+        :root {
+            --main-font: 'Fantasque Sans Mono', monospace;
+            --headline-font: 'Bokor', sans;
+            /*
+      --headline-font: 'Orbitron', sans;
+      --headline-font: 'DM Serif Display', sans;
+      --headline-font: 'Audiowide', sans;
+      --headline-font-size: 3em;
+        */
+            --headline-font-size: 4.5em;
+            --main-bg: #1e1e2e;
+            --main-bg-gradient: linear-gradient(90deg, rgba(30, 30, 46, 1) 0%, rgba(29, 15, 40, 1) 34%, rgba(14, 0, 33, 1) 69%, rgba(24, 20, 33, 1) 100%);
+            --main-fg: #dcdfe4;
+            --container-bg: #2e2e3e;
+            --container-bg-gradient: linear-gradient(90deg, rgba(46, 46, 62, 1) 0%, rgba(69, 54, 83, 1) 34%, rgba(62, 37, 72, 1) 75%, rgba(44, 40, 53, 1) 100%);
+            --error-bg: #ff0000;
+            --error-line-start: #ff004488;
+            --error-line-end: #ff008844;
+            --error-bg-gradient: linear-gradient(90deg, rgba(236, 24, 102, 1) 0%, rgba(227, 53, 22, 1) 100%);
+            --error-fg: #fcfff4;
+            --label-bg: #33008888;
+            --label-bg-gradient: linear-gradient(90deg, rgba(51, 0, 136, 0.7899159663865546) 0%, rgba(44, 40, 53, 0.7899159663865546) 100%);
+            --label-bg-gradient: linear-gradient(90deg, rgba(51, 0, 136, 0.28) 0%, rgba(44, 40, 53, 0.58) 100%);
+
+            --form-width: 600px;
+            --container-border-radius: 10px;
+            --input-border-radius: 5px;
+
+            --accent-bg: #a16cd3;
+            /*--accent-bg-gradient: linear-gradient(90deg, rgba(108,211,181,1) 0%, rgba(161,108,211,1) 50%, rgba(148,187,233,1) 100%);*/
+            --accent-bgg1: rgba(88, 191, 161, 1);
+            --accent-bgg2: rgba(141, 88, 191, 1);
+            --accent-bgg3: rgba(128, 167, 213, 1);
+            --accent-bgp1: 0%;
+            --accent-bgp2: 50%;
+            --accent-bgp3: 100%;
+            --accent-fg: #f1fcf3;
+            --accent-hover-bg: #845cbf;
+            /*--accent-hover-bg-gradient: linear-gradient(90deg, rgba(230,199,253,1) 0%, rgba(253,215,216,1) 39%, rgba(254,222,241,1) 74%, rgba(204,253,246,1) 100%);*/
+            --accent-hover-bgg1: rgba(230, 199, 253, 1);
+            --accent-hover-bgg2: rgba(253, 215, 216, 1);
+            --accent-hover-bgg3: rgba(254, 222, 241, 1);
+            --accent-hover-bgg4: rgba(204, 253, 246, 1);
+            --accent-hover-bgp1: 0%;
+            --accent-hover-bgp2: 39%;
+            --accent-hover-bgp3: 74%;
+            --accent-hover-bgp4: 100%;
+            --accent-hover-fg: #010c03;
+            --accent-disabled-bg-gradient: linear-gradient(90deg, hsl(163 24% 43% / 1) 0%, hsl(271 24% 43% / 1) 50%, hsl(212 26% 55% / 1) 100%);
+            --accent-disabled-bg: #6c4d96;
+            --accent-disabled-fg: #6e6e6e;
+            --link-fg: pink;
+            --link-hover-fg: acidpink;
+        }
+
+    /*-----------------------------------------------------------------------*/
+
+        body {
+            font-family: var(--main-font);
+            background: var(--main-bg);
+            background: var(--main-bg-gradient);
+            color: var(--main-fg);
+              padding: 0;
+                margin: 0;
+        }
+
+        #content {
+            min-height: 100vh;
+            position: relative;
+            margin-bottom: 0;
+            padding: 0;
+        }
+
+    /*-----------------------------------------------------------------------*/
+
+        h1 {
+            font-family: var(--headline-font);
+            font-size: var(--headline-font-size);
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 0;
+
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4), 0 0 15px var(--accent-bg);
+            background: linear-gradient(90deg, var(--accent-bgg1), var(--accent-bgg2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+    /*-----------------------------------------------------------------------*/
+
+        #demo {
+            background: var(--error-bg);
+            background: var(--error-bg-gradient);
+            background: none;
+background: repeating-linear-gradient( -45deg, var(--error-line-start), var(--error-line-end), 1px, #0000 1px, #0000 8px );
+            color: var(--error-fg);
+            opacity: 0.8;
+            margin-bottom: 2em;
+            max-width: var(--form-width);
+            margin-left: calc(50% - (var(--form-width) / 2));
+            padding: 0.5em;
+            font-size: 120%;
+            position: relative;
+            height: calc-size(auto, size);
+            transition:
+                opacity 0.5s ease-in,
+                height 0.52s 0.3s ease-out,
+                transform 0.48s 0.2s ease-in,
+                padding-top 0.51s 0.3s ease-out,
+                padding-bottom 0.49s 0.2s ease-in,
+                margin-top 0.53s 0.3s ease-out,
+                margin-bottom 0.47s 0.2s ease-in;
+            /* transition: 0.5s ease-in; */
+        }
+
+        #demo button {
+            background: none;
+            position: absolute;
+            margin: 0;
+            top: calc((100% - 2em) / 2);
+            right: 0.5em;
+            width: 2em;
+            height: 2em;
+            padding: 0;
+            z-index: 10;
+        }
+        #demo button:hover {
+          color: var(--link-fg);
+        }
+
+        #demo.hidden {
+            height: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            transform: scaleY(0);
+            opacity: 0;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+    /*-----------------------------------------------------------------------*/
+
+        .form_container {
+            max-width: var(--form-width);
+            margin: auto;
+            background: var(--container-bg);
+            background: var(--container-bg-gradient);
+            padding: 20px;
+            border-radius: var(--container-border-radius);
+            transition: 1s ease-out;
+            height: calc-size(auto, size);
+            /*
+      background-image: url("bg.png");
+      background-size: cover;
+      background-position-y: center;
+      background-position-x: center;
+      background-blend-mode: overlay;
+        */
+        }
+
+        #output {
+            text-align: center;
+        }
+
+        .rotating-indicator {
+            display: inline-block;
+            font-size: 24px;
+            animation: rotation 1s infinite linear;
+        }
+
+        @keyframes rotation {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .error-box {
+            border-radius: var(--input-border-radius);
+            padding: 1em;
+            text-align: center;
+            background: var(--error-bg);
+            background: var(--error-bg-gradient);
+            color: var(--error-fg);
+        }
+
+        label {
+            /*
+      background: var(--label-bg);
+      background: var(--label-bg-gradient);
+        */
+            padding: 0.5em;
+            border-radius: var(--input-border-radius);
+        }
+
+    /*-----------------------------------------------------------------------*/
+
+        input,
+        select,
+        button,
+        .button {
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid var(--accent-bg);
+            border-radius: var(--input-border-radius);
+            margin-bottom: 1.5em;
+        }
+
+        input[type="file"] {
+            width: 96%;
+        }
+
+        button,
+        .button {
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.5s ease-in;
+
+            --bgg1: var(--accent-bgg1);
+            --bgg2: var(--accent-bgg2);
+            --bgg3: var(--accent-bgg3);
+            --bgg4: var(--accent-hover-bgg1);
+            --bgg5: var(--accent-hover-bgg2);
+            --bgg6: var(--accent-hover-bgg3);
+            --bgg7: var(--accent-hover-bgg4);
+
+            --p1: calc(var(--accent-bgp1) / 3);
+            --p2: calc(var(--accent-bgp2) / 3);
+            --p3: calc(var(--accent-bgp3) / 3);
+            --p4: calc((var(--accent-hover-bgp1) + 200%) / 3);
+            --p5: calc((var(--accent-hover-bgp2) + 200%) / 3);
+            --p6: calc((var(--accent-hover-bgp3) + 200%) / 3);
+            --p7: calc((var(--accent-hover-bgp4) + 200%) / 3);
+
+            --pp: 0%;
+            background: linear-gradient(90deg, var(--bgg1) var(--p1), var(--bgg2) var(--p2), var(--bgg3) var(--p3), var(--bgg4) var(--p4), var(--bgg5) var(--p5), var(--bgg6) var(--p6), var(--bgg7) var(--p7)) var(--pp)/ 300%;
+            color: var(--accent-fg);
+        }
+        .button {
+            width: 96%;
+            display: block;
+              text-align: center;
+        }
+
+        .button:disabled,
+        button:disabled {
+            background: var(--accent-disabled-bg);
+            background: var(--accent-disabled-bg-gradient);
+            color: var(--accent-disabled-fg);
+            cursor: not-allowed;
+        }
+
+        .button:hover:not(:disabled),
+        button:hover:not(:disabled) {
+            --pp: 100%;
+            color: var(--accent-hover-fg);
+        }
+
+    /*-----------------------------------------------------------------------*/
+
+        a {
+            color: white;
+            text-decoration: none;
+        }
+
+        #addr_display a {
+            color: var(--link-fg);
+            text-decoration: underline;
+        }
+
+        #addr_display a:hover {
+            color: var(--link-hover-fg);
+        }
+
+        #upload-button {
+            margin-bottom: 0.5em;
+        }
+
+    /*-----------------------------------------------------------------------*/
+
+        .note {
+            text-align: center;
+            font-size: 0.8em;
+            opacity: 0.66;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        .note a {
+            font-weight: bold;
+        }
+
+        .note a:hover {
+            text-decoration: underline;
+        }
+
+    /*-----------------------------------------------------------------------*/
+
+        .logo_big {
+            margin-top: 2em;
+            text-align: center;
+        }
+
+        .logo_big img {
+            height: 20em;
+            mix-blend-mode: lighten;
+        }
+
+        @property --gp {
+            syntax: '<percentage>';
+            /* its type */
+            inherits: false;
+            initial-value: 0%;
+            /* the initial value */
+        }
+
+        @keyframes gradiflow {
+            0% {
+                --gp: 0%;
+            }
+
+            25% {
+                --gp: 25%;
+            }
+
+            50% {
+                --gp: 50%;
+            }
+
+            75% {
+                --gp: 75%;
+            }
+
+            100% {
+                --gp: 100%;
+            }
+        }
+
+        @keyframes gradiflow {
+            0% {
+                --gp: 0%;
+            }
+
+            25% {
+                --gp: 50%;
+            }
+
+            50% {
+                --gp: 100%;
+            }
+
+            75% {
+                --gp: 50%;
+            }
+
+            100% {
+                --gp: 0%;
+            }
+        }
+
+
+        .logo_big .combo {
+width: min(var(--form-width), 100vw);
+    min-height: calc(min(var(--form-width), 100vw)* 0.72);
+            mix-blend-mode: lighten;
+            position: relative;
+left: calc(50% - min(var(--form-width), 100vw) / 2);
+        }
+
+        .logo_big .combo img {
+width: min(var(--form-width), 100vw);
+              height: auto;
+            mix-blend-mode: normal;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 10;
+        }
+
+        .logo_big .combo .gradient {
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            position: absolute;
+
+            --bgg1: var(--accent-bgg1);
+            --bgg2: var(--accent-bgg2);
+            --bgg3: var(--accent-bgg3);
+            --bgg4: var(--accent-hover-bgg1);
+            --bgg5: var(--accent-hover-bgg2);
+            --bgg6: var(--accent-hover-bgg3);
+            --bgg7: var(--accent-hover-bgg4);
+            --bgg8: var(--accent-bgg1);
+
+            --p1: calc(var(--accent-bgp1) / 3);
+            --p2: calc(var(--accent-bgp2) / 3);
+            --p3: calc(var(--accent-bgp3) / 3);
+            --p4: calc((var(--accent-hover-bgp1) + 200%) / 3);
+            --p5: calc((var(--accent-hover-bgp2) + 200%) / 3);
+            --p6: calc((var(--accent-hover-bgp3) + 200%) / 3);
+            --p7: calc(((var(--accent-hover-bgp3) + var(--accent-hover-bgp4)) / 2 + 200%) / 3);
+            --p8: calc((var(--accent-hover-bgp4) + 200%) / 3);
+
+            background: linear-gradient(90deg, var(--bgg1) var(--p1), var(--bgg2) var(--p2), var(--bgg3) var(--p3), var(--bgg4) var(--p4), var(--bgg5) var(--p5), var(--bgg6) var(--p6), var(--bgg7) var(--p7), var(--bgg8) var(--p8)) var(--gp, 0%)/ 300%;
+        }
+
+        .logo_big .combo .gradient.animated {
+            animation: ease-in gradiflow 10s infinite;
+        }
+
+    /*-----------------------------------------------------------------------*/
+
+        .logo {
+            margin-top: 3em;
+            text-align: center;
+            opacity: 0.33;
+        }
+
+        .logo img {
+            height: 4em;
+            mix-blend-mode: overlay;
+        }
+
+        .support {
+            margin-top: 1em;
+            text-align: center;
+            padding-bottom: 4em;
+        }
+
+    /*-----------------------------------------------------------------------*/
+
+        .credits {
+            margin: 0;
+            padding: 0;
+            margin-top: 3em;
+            bottom: 0;
+            position: absolute;
+            width: calc(100% - 2em);
+            padding-bottom: 0.5em;
+        }
+
+        .credits .note {
+            padding-left: 2em;
+        }
+
+    /*************************************************************************/
+
+    </style>
+</head>
+
+<!-------------------------------------------------------------------------->
+<!-------------------------------------------------------------------------->
+<!-------------------------------------------------------------------------->
+
+<body>
+    <div id="content">
+
+        <h1>Actionless Mastering</h1>
+
+        <div id="demo">
+            <button class="close" onclick="closeDemoWarning()">x</button>
+            <p class="note">The app is running in <b>FREE DEMO</b> mode.</p>
+            <p class="note">The resulting track will be cut to <b>1 minute</b> length.</p>
+        </div>
+
+        <!-------------------------------------------------------------------------->
+
+        <div class="form_container">
+            <form id="upload-form" autocomplete="off" action="#">
+                <label for="file">1. Select WAV File with your Mix:</label>
+                <input type="file" id="file" accept=".wav" required>
+                <label for="preset">Select Mastering Preset:</label>
+                <select id="preset" onchange="handlePresetChange()" autocomplete="off">
+                    <option value="breaks">Breaks</option>
+                    <option value="electronic">Electronic</option>
+                    <option value="jazz">Jazz</option>
+                    <option value="techno">Techno</option>
+                    <option value="trap">Trap</option>
+                    <option value="ref_track">-- Upload your own reference track--</option>
+                </select>
+                <label for="reference">Select Reference Track:</label>
+                <input type="file" id="reference" accept=".wav">
+                <button type="button" id="upload-button" onclick="handleFileUpload()">2. Upload Tracks</button>
+                <p class="note">(the files will be uploaded to <a href="https://file.io/">file.io</a> and stored for 1 day)</p>
+            </form>
+            <div id="output"></div>
+        </div>
+
+        <!-------------------------------------------------------------------------->
+
+        <div class="logo_big">
+            <div class="combo">
+                <img class="mask" src="mask.png">
+                <!--<div class="gradient">-->
+                <div class="gradient animated">
+                </div>
+            </div>
+        </div>
+        <!--<div class="logo_big">-->
+        <!--    <img src="logo_big_2.png" style="opacity: 0.6;">-->
+        <!--    <img src="logo_big_5.png" style="opacity: 0.6;">-->
+        <!--    <img src="logo_big_1.png" style="opacity: 0.6;">-->
+        <!--</div>-->
+        <!--<div class="logo_big">-->
+        <!--    [><img src="logo_big_3.png"><]-->
+        <!--    <img src="logo_big.png">-->
+        <!--    <img src="logo_big_4.png">-->
+        <!--</div>-->
+
+        <div class="logo">
+            <img src="logo.png">
+        </div>
+
+        <div class="support">
+            <a href="#" id="addr_click">Need help? Contact Customer Care</a><span id="addr_display"></span>
+            <p id="addr_source" style="display: none;">actionless.mastering</p>
+        </div>
+
+        <div class="credits">
+            <p class="note">©2024-2025 <a href="https://actionless.github.io/">LovelessWorld</a>, NL 🇳🇱</p>
+        </div>
+
+    </div>
+
+    <!-------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------------->
+
+    <script>
+
+        /*********************************************************************/
+
+        document.getElementById("addr_click").onclick = () => {
+            const addr = document.getElementById("addr_source").innerHTML + '+support@gmail.com';
+            document.getElementById("addr_display").innerHTML = `: <a href="mailto:${addr}">${addr}</a>`;
+            return false;
+        };
+
+        /*-------------------------------------------------------------------*/
+
+        async function closeDemoWarning() {
+            const demoWarning = document.getElementById('demo');
+            //demoWarning.style.display = "none";
+            demoWarning.classList.add("hidden");
+        }
+
+        /*-------------------------------------------------------------------*/
+
+        async function handlePresetChange() {
+            const presetSelect = document.getElementById('preset');
+            const referenceInput = document.getElementById('reference');
+            if (presetSelect.value === "ref_track") {
+                referenceInput.labels[0].style.display = "initial";
+                referenceInput.style.display = "initial";
+            } else {
+                referenceInput.labels[0].style.display = "none";
+                referenceInput.style.display = "none";
+            };
+        }
+
+        handlePresetChange();
+
+        /*-------------------------------------------------------------------*/
+
+        async function handleFileUpload() {
+            const fileInput = document.getElementById('file');
+            const referenceInput = document.getElementById('reference');
+            const presetSelect = document.getElementById('preset');
+            const uploadButton = document.getElementById('upload-button');
+            const outputDiv = document.getElementById('output');
+
+            if (!fileInput.files[0]) {
+                outputDiv.innerHTML = '<p class="error-box">Please select a main track to upload.</p>';
+                return;
+            }
+
+            uploadButton.disabled = true;
+            outputDiv.innerHTML = '<p>Uploading files... <span class="rotating-indicator">👾</span></p>';
+
+            const files = [fileInput.files[0]];
+            if (referenceInput.files[0]) files.push(referenceInput.files[0]);
+
+            const uploadPromises = files.map(file => {
+                const formData = new FormData();
+                formData.append('file', file);
+
+                return fetch('https://file.io/?expires=1d', {
+                    method: 'POST',
+                    body: formData
+                }).then(response => response.json());
+            });
+
+            try {
+                const results = await Promise.all(uploadPromises);
+                const failedUploads = results.filter(result => !result.success);
+
+                if (failedUploads.length > 0) {
+                    outputDiv.innerHTML = '<p class="error-box">Some uploads failed. Please try again.</p>';
+                    uploadButton.disabled = false;
+                    return;
+                }
+
+                const fileUrls = results.map(result => result.link);
+                const emailBody = {
+                    mainTrack: fileUrls[0],
+                    referenceTrack: fileUrls[1] || null,
+                    preset: presetSelect.value
+                };
+
+                //const mailtoLink = `mailto:?subject=Mastering Request&body=${encodeURIComponent(JSON.stringify(emailBody, null, 2))}`;
+                const addr = document.getElementById("addr_source").innerHTML + '+submit@gmail.com';
+                const mailtoLink = `mailto:${addr}?subject=Automated Mastering Request&body=${encodeURIComponent(JSON.stringify(emailBody, null, 2))}`;
+
+                outputDiv.innerHTML = `
+          <p>Files uploaded successfully!</p>
+          <p><strong>Main Track URL:</strong> <a href="${fileUrls[0]}" target="_blank">${fileUrls[0]}</a></p>
+          ${fileUrls[1] ? `<p><strong>Reference Track URL:</strong> <a href="${fileUrls[1]}" target="_blank">${fileUrls[1]}</a></p>` : ''}
+          <p><a href="${mailtoLink}" class="button">3. Submit to Mastering via Email</a></p>
+          <p> (you will receive the result via E-Mail when mastering is ready) </p>
+        `;
+            } catch (error) {
+                outputDiv.innerHTML = `<p class="error-box">Error uploading files: ${error.message}</p>`;
+                uploadButton.disabled = false;
+                //} finally {
+                //  uploadButton.disabled = false; // Re-enable button after upload
+            }
+        }
+
+        /*********************************************************************/
+
+    </script>
+
+</body>
+
+<!-------------------------------------------------------------------------->
+<!-------------------------------------------------------------------------->
+<!-------------------------------------------------------------------------->
+
+</html>
