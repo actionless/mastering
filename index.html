@@ -500,6 +500,7 @@ width: min(var(--form-width), 100vw);
                     <option value="breaks">Breaks</option>
                     <option value="electronic">Electronic</option>
                     <option value="jazz">Jazz</option>
+                    <option value="metal">Metal</option>
                     <option value="techno">Techno</option>
                     <option value="trap">Trap</option>
                     <option value="ref_track">-- Upload your own reference track--</option>
@@ -507,7 +508,7 @@ width: min(var(--form-width), 100vw);
                 <label for="reference">Select Reference Track:</label>
                 <input type="file" id="reference" accept=".wav">
                 <button type="button" id="upload-button" onclick="handleFileUpload()">2. Upload Tracks</button>
-                <p class="note">(the files will be uploaded to <a href="https://file.io/">file.io</a> and stored for 1 day)</p>
+                <p class="note">(the files will be uploaded to <a href="https://temp.sh/">temp.sh</a> and stored for 1 day)</p>
             </form>
             <div id="output"></div>
         </div>
@@ -609,7 +610,7 @@ width: min(var(--form-width), 100vw);
                 const formData = new FormData();
                 formData.append('file', file);
 
-                return fetch('https://file.io/?expires=1d', {
+                return fetch('https://actionless-mastering-upload-backend.onrender.com/upload', {
                     method: 'POST',
                     body: formData
                 }).then(response => response.json());
@@ -617,10 +618,11 @@ width: min(var(--form-width), 100vw);
 
             try {
                 const results = await Promise.all(uploadPromises);
-                const failedUploads = results.filter(result => !result.success);
+                const failedUploads = results.filter(result => !result.link);
 
                 if (failedUploads.length > 0) {
                     outputDiv.innerHTML = '<p class="error-box">Some uploads failed. Please try again.</p>';
+                    console.log(failedUploads);
                     uploadButton.disabled = false;
                     return;
                 }
