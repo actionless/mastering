@@ -159,7 +159,7 @@ background: repeating-linear-gradient( -45deg, var(--error-line-start), var(--er
     /*-----------------------------------------------------------------------*/
 
         .ui_container {
-            max-width: var(--form-width);
+            /*max-width: var(--form-width);*/
             margin: auto;
             background: var(--container-bg);
             background: var(--container-bg-gradient);
@@ -175,9 +175,13 @@ background: repeating-linear-gradient( -45deg, var(--error-line-start), var(--er
       background-blend-mode: overlay;
         */
         }
+        .form_container {
+            max-width: var(--form-width);
+        }
 
         .samples_container {
           margin-top: var(--container-border-radius);
+          display: table;
         }
 
         #output {
@@ -518,7 +522,7 @@ width: min(var(--form-width), 100vw);
 
         <!-------------------------------------------------------------------------->
         <div class="ui_container samples_container">
-          Audio examples:
+          Audio Examples:
           <a href="https://www.youtube.com/watch?v=GDloxVvJXUk">Metal</a>
         </div>
         <!-------------------------------------------------------------------------->
