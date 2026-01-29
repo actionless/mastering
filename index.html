@@ -158,7 +158,7 @@ background: repeating-linear-gradient( -45deg, var(--error-line-start), var(--er
 
     /*-----------------------------------------------------------------------*/
 
-        .form_container {
+        .ui_container {
             max-width: var(--form-width);
             margin: auto;
             background: var(--container-bg);
@@ -174,6 +174,10 @@ background: repeating-linear-gradient( -45deg, var(--error-line-start), var(--er
       background-position-x: center;
       background-blend-mode: overlay;
         */
+        }
+
+        .samples_container {
+          margin-top: var(--container-border-radius);
         }
 
         #output {
@@ -284,16 +288,19 @@ background: repeating-linear-gradient( -45deg, var(--error-line-start), var(--er
 
         a {
             color: white;
+        }
+
+        a:hover {
+            color: var(--link-hover-fg);
+        }
+
+        a.undecorate {
             text-decoration: none;
         }
 
-        #addr_display a {
+        #addr_display a:not(:hover) {
             color: var(--link-fg);
             text-decoration: underline;
-        }
-
-        #addr_display a:hover {
-            color: var(--link-hover-fg);
         }
 
         #upload-button {
@@ -312,10 +319,6 @@ background: repeating-linear-gradient( -45deg, var(--error-line-start), var(--er
 
         .note a {
             font-weight: bold;
-        }
-
-        .note a:hover {
-            text-decoration: underline;
         }
 
     /*-----------------------------------------------------------------------*/
@@ -491,7 +494,7 @@ width: min(var(--form-width), 100vw);
 
         <!-------------------------------------------------------------------------->
 
-        <div class="form_container">
+        <div class="ui_container form_container">
             <form id="upload-form" autocomplete="off" action="#">
                 <label for="file">1. Select WAV File with your Mix:</label>
                 <input type="file" id="file" accept=".wav" required>
@@ -513,6 +516,11 @@ width: min(var(--form-width), 100vw);
             <div id="output"></div>
         </div>
 
+        <!-------------------------------------------------------------------------->
+        <div class="ui_container samples_container">
+          Audio examples:
+          <a href="https://www.youtube.com/watch?v=GDloxVvJXUk">Metal</a>
+        </div>
         <!-------------------------------------------------------------------------->
 
         <div class="logo_big">
@@ -539,12 +547,12 @@ width: min(var(--form-width), 100vw);
         </div>
 
         <div class="support">
-            <a href="#" id="addr_click">Need help? Contact Customer Care</a><span id="addr_display"></span>
+            <a class="undecorate" href="#" id="addr_click">Need help? Contact Customer Care</a><span id="addr_display"></span>
             <p id="addr_source" style="display: none;">actionless.mastering</p>
         </div>
 
         <div class="credits">
-            <p class="note">©2024-2025 <a href="https://actionless.github.io/">LovelessWorld</a>, NL 🇳🇱</p>
+            <p class="note">©2024-2025 <a class="undecorate" href="https://actionless.github.io/">LovelessWorld</a>, NL 🇳🇱</p>
         </div>
 
     </div>
