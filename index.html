@@ -79,7 +79,7 @@
             --accent-disabled-bg: #6c4d96;
             --accent-disabled-fg: #6e6e6e;
             --link-fg: pink;
-            --link-hover-fg: acidpink;
+            --link-hover-fg: hotpink;
         }
 
     /*-----------------------------------------------------------------------*/
@@ -194,6 +194,27 @@ background: repeating-linear-gradient( -45deg, var(--error-line-start), var(--er
         .samples_container {
           margin-top: var(--container-border-radius);
           display: table;
+          transition: filter 200ms ease, transform 200ms ease;
+        }
+
+        .samples_container:hover {
+          filter: brightness(1.25);
+          transform: scale(1.03) translate(0, 1px);
+        }
+
+        .samples_container a {
+          transition: color 200ms ease, font-weight 200ms ease;
+          font-weight: normal;
+        }
+
+        .samples_container a:hover {
+          color: var(--link-hover-fg);
+          font-weight: bold;
+        }
+        .samples_container a:focus-visible {
+          outline: none;
+          color: var(--link-hover-fg);
+          text-shadow: 0 0 6px rgba(255,105,180,0.6);
         }
 
         #output {
@@ -489,7 +510,12 @@ width: min(var(--form-width), 100vw);
         }
 
     /*************************************************************************/
-
+    @media (prefers-reduced-motion: reduce) {
+      .samples_container,
+      .samples_container a {
+        transition: none;
+      }
+    }
     </style>
 </head>
 
