@@ -543,7 +543,7 @@ width: min(var(--form-width), 100vw);
             <form id="upload-form" autocomplete="off" action="#">
                 <label for="file">1. Select WAV File with your Mix:</label>
                 <input type="file" id="file" accept=".wav" required>
-                <label for="preset">Select Mastering Preset:</label>
+                <label for="preset">2. Select Mastering Preset:</label>
                 <select id="preset" onchange="handlePresetChange()" autocomplete="off">
                     <option value="breaks">Breaks</option>
                     <option value="electronic">Electronic</option>
@@ -553,9 +553,9 @@ width: min(var(--form-width), 100vw);
                     <option value="trap">Trap</option>
                     <option value="ref_track">-- Upload your own reference track--</option>
                 </select>
-                <label for="reference">Select Reference Track:</label>
+                <label for="reference">2. Select Reference Track:</label>
                 <input type="file" id="reference" accept=".wav">
-                <button type="button" id="upload-button" onclick="handleFileUpload()">2. Upload Tracks</button>
+                <button type="button" id="upload-button" onclick="handleFileUpload()">3. Upload Tracks</button>
                 <p class="note">(the files will be uploaded to <a href="https://temp.sh/">temp.sh</a> and stored for 1 day)</p>
             </form>
             <div id="output"></div>
@@ -696,7 +696,7 @@ width: min(var(--form-width), 100vw);
           <p>Files uploaded successfully!</p>
           <p><strong>Main Track URL:</strong> <a href="${fileUrls[0]}" target="_blank">${fileUrls[0]}</a></p>
           ${fileUrls[1] ? `<p><strong>Reference Track URL:</strong> <a href="${fileUrls[1]}" target="_blank">${fileUrls[1]}</a></p>` : ''}
-          <p><a href="${mailtoLink}" class="button">3. Submit to Mastering via Email</a></p>
+          <p><a href="${mailtoLink}" class="button">4. Submit to Mastering via Email</a></p>
           <p> (you will receive the result via E-Mail when mastering is ready) </p>
         `;
             } catch (error) {
