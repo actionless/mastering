@@ -122,7 +122,7 @@
             background: var(--error-bg);
             background: var(--error-bg-gradient);
             background: none;
-background: repeating-linear-gradient( -45deg, var(--error-line-start), var(--error-line-end), 1px, #0000 1px, #0000 8px );
+            background: repeating-linear-gradient( -45deg, var(--error-line-start), var(--error-line-end), 1px, #0000 1px, #0000 8px );
             color: var(--error-fg);
             opacity: 0.8;
             margin-bottom: 2em;
@@ -210,10 +210,6 @@ background: repeating-linear-gradient( -45deg, var(--error-line-start), var(--er
         .samples_container a:hover {
           color: var(--link-hover-fg);
           font-weight: bold;
-        }
-        .samples_container a:focus-visible {
-          outline: none;
-          color: var(--link-hover-fg);
           text-shadow: 0 0 6px rgba(255,105,180,0.6);
         }
 
@@ -511,11 +507,23 @@ width: min(var(--form-width), 100vw);
 
     /*************************************************************************/
     @media (prefers-reduced-motion: reduce) {
+      #demo,
+      .ui_container,
       .samples_container,
-      .samples_container a {
+      .samples_container a,
+      button,
+      .button {
         transition: none;
+        filter: none;
+      }
+
+      .logo_big .combo .gradient.animated,
+      .rotating-indicator {
+          animation: none;
       }
     }
+
+    /*************************************************************************/
     </style>
 </head>
 
