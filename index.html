@@ -719,7 +719,7 @@ width: min(var(--form-width), 100vw);
           <p><strong>Main Track URL:</strong> <a href="${fileUrls[0]}" target="_blank">${fileUrls[0]}</a></p>
           ${fileUrls[1] ? `<p><strong>Reference Track URL:</strong> <a href="${fileUrls[1]}" target="_blank">${fileUrls[1]}</a></p>` : ''}
           <p><a href="${mailtoLink}" class="button">4. Submit to Mastering via Email</a></p>
-          <p> (you will receive the result via E-Mail when mastering is ready) </p>
+          <p> (you will receive the result via email when mastering is ready) </p>
         `;
             } catch (error) {
                 outputDiv.innerHTML = `<p class="error-box">Error uploading files: ${error.message}</p>`;
