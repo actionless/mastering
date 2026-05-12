@@ -82,6 +82,12 @@
             --link-hover-fg: hotpink;
         }
 
+    @media (max-width: 660px) {
+        :root {
+            --form-width: 340px;
+        }
+    }
+
     /*-----------------------------------------------------------------------*/
 
         body {
@@ -105,9 +111,11 @@
         h1 {
             font-family: var(--headline-font);
             font-size: var(--headline-font-size);
-            text-align: center;
+            line-height: 62px;
+            padding: 34px;
             margin-top: 0;
             margin-bottom: 0;
+            text-align: center;
 
             letter-spacing: 1px;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4), 0 0 15px var(--accent-bg);
@@ -195,6 +203,8 @@
           margin-top: var(--container-border-radius);
           display: table;
           transition: filter 200ms ease, transform 200ms ease;
+          max-width: var(--form-width);
+          text-align: center;
         }
 
         .samples_container:hover {
@@ -543,7 +553,7 @@ width: min(var(--form-width), 100vw);
         <div id="demo">
             <button class="close" onclick="closeDemoWarning()">x</button>
             <p class="note">The app is running in <b>FREE DEMO</b> mode.</p>
-            <p class="note">The resulting track will be cut to <b>1 minute</b> length.</p>
+            <p class="note">The resulting track will be cut to <b><nobr>1 minute</nobr></b> length.</p>
         </div>
 
         <!-------------------------------------------------------------------------->
@@ -551,7 +561,7 @@ width: min(var(--form-width), 100vw);
         <div class="ui_container form_container">
             <form id="upload-form" autocomplete="off" action="#">
                 <label for="file">1. Select WAV File with your Mix:</label>
-                <input type="file" id="file" accept=".wav" required>
+                <input type="file" id="file" accept=".wav,.flac,.mp3,.ogg" required>
                 <label for="preset">2. Select Mastering Preset:</label>
                 <select id="preset" onchange="handlePresetChange()" autocomplete="off">
                     <!--<option value="breaks">Breaks</option>-->
@@ -565,7 +575,7 @@ width: min(var(--form-width), 100vw);
                 <label for="reference">2. Select Reference Track:</label>
                 <input type="file" id="reference" accept=".wav">
                 <button type="button" id="upload-button" onclick="handleFileUpload()">3. Upload Tracks</button>
-                <p class="note">(the files will be uploaded to <a href="https://temp.sh/">temp.sh</a> and stored for 1 day)</p>
+                <p class="note">(the files will be uploaded to <a href="https://temp.sh/">temp.sh</a> and stored for <nobr>1 day</nobr>)</p>
             </form>
             <div id="output"></div>
         </div>
